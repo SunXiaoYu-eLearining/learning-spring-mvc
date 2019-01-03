@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <bean id="user_singleton" class="cp02.User">
+        <property name="id" value="1"></property>
+        <property name="name" value="Radon"></property>
+        <property name="age" value="34"></property>
+    </bean>
+
+    <bean id="user_prototype" class="cp02.User" scope="prototype">
+        <property name="id" value="1"></property>
+        <property name="name" value="Radon"></property>
+        <property name="age" value="34"></property>
+    </bean>
+
+    <bean id="radon" class="cp02.User">
+        <property name="id" value="1"></property>
+        <property name="name" value="Radon"></property>
+        <property name="age" value="34"></property>
+    </bean>
+    <bean id="allen" class="cp02.User" parent="radon">
+        <property name="id" value="3"></property>
+        <property name="name" value="allen"></property>
+        <property name="age" value="34"></property>
+    </bean>
+
+    <bean id="car" class="cp02.Car"></bean>
+    <bean id="people" class="cp02.User" depends-on="car"></bean>
+
+    <context:property-placeholder location="classpath:cp02-c3p0.properties"></context:property-placeholder>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${pwd}"></property>
+        <property name="driverClass" value="${driverName}"></property>
+        <property name="jdbcUrl" value="${url}"></property>
+    </bean>
+
+    <bean id="user_p_scope" class="cp02.User" p:id="1" p:name="HELLO" p:age="23"></bean>
+</beans>
