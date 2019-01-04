@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="car1" class="cp03.StaticCarFactory" factory-method="getCar">
+        <constructor-arg value="1"></constructor-arg>
+    </bean>
+
+    <bean id="carFactory" class="cp03.InstanceCarFactory"></bean>
+    <bean id="car2" factory-bean="carFactory" factory-method="getCar">
+        <constructor-arg value="2"></constructor-arg>
+    </bean>
+
+    <bean id="person" class="cp03.Person" autowire="byName">
+        <property name="id" value="1"></property>
+        <property name="name" value="ZS"></property>
+    </bean>
+
+    <bean id="car" class="cp03.StaticCarFactory" factory-method="getCar">
+        <constructor-arg value="2"></constructor-arg>
+    </bean>
+</beans>
